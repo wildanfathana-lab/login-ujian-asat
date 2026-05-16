@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Login Ujian ASAT | SMP PGRI 1 CIBINONG</title>
     <style>
         * {
@@ -23,7 +26,6 @@
             position: relative;
         }
 
-        /* Vektor dekoratif */
         .vector-bg {
             position: fixed;
             top: 0;
@@ -253,18 +255,15 @@
 
 <script>
     // ============================================================
-    // KONFIGURASI - GANTI URL INI DENGAN ENDPOINT VERCEL ANDA!
+    // KONFIGURASI
     // ============================================================
     const API_URL = 'https://login-ujian-asat.vercel.app/api/validate';
     
-    // ============================================================
-    // URL REDIRECT SETELAH LOGIN SUKSES
-    // Ganti dengan halaman ujian Anda (bisa di GitHub Pages juga)
-    // ============================================================
+    // ⚠️ PERBAIKI URL INI - Ganti dengan halaman ujian yang benar!
     const REDIRECT_URL = 'https://sites.google.com/view/final-exam-v2025/pembagian-hari?authuser=1';
     
     // ============================================================
-    // SCRIPT LOGIN - TANPA TOKEN
+    // SCRIPT LOGIN - DENGAN PERBAIKAN SESSION
     // ============================================================
     
     const form = document.getElementById('loginForm');
@@ -272,6 +271,11 @@
     const errorBox = document.getElementById('errorBox');
     const errorTextSpan = document.getElementById('errorText');
     let isProcessing = false;
+
+    // Hapus session storage saat halaman dimuat (refresh)
+    window.addEventListener('load', function() {
+        sessionStorage.clear();
+    });
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -321,15 +325,18 @@
             const result = await response.json();
             
             if (result.success) {
-                // ✅ LOGIN SUKSES - REDIRECT LANGSUNG TANPA TOKEN
-                // Simpan info peserta di sessionStorage (opsional)
+                // ✅ LOGIN SUKSES
+                // Hapus session lama sebelum menyimpan yang baru
+                sessionStorage.clear();
                 sessionStorage.setItem('logged_in_as', id_peserta);
                 sessionStorage.setItem('kelas', result.data.kelas);
                 
-                // REDIRECT KE HALAMAN UJIAN
+                // Redirect ke halaman ujian
                 window.location.href = REDIRECT_URL + '?id=' + encodeURIComponent(id_peserta);
             } else {
-                // ❌ LOGIN GAGAL
+                // ❌ LOGIN GAGAL - Hapus semua session storage
+                sessionStorage.clear();
+                
                 errorTextSpan.innerText = result.message || 'ID Peserta atau Password salah.';
                 errorBox.classList.add('show');
                 passwordInput.value = '';
@@ -339,6 +346,7 @@
             console.error('Error:', error);
             errorTextSpan.innerText = 'Gagal terhubung ke server. Periksa koneksi Anda.';
             errorBox.classList.add('show');
+            sessionStorage.clear();
         } finally {
             isProcessing = false;
             submitBtn.innerHTML = '➡️ MASUK UJIAN';
