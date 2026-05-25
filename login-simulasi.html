@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <title>SIMULASI Ujian ASAT | SMP PGRI 1 CIBINONG</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            background:radial-gradient(circle at 20% 30%, #0a2a0a, #030303);
+            background-color:#0a1a0a;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:20px;
+            position:relative;
+        }
+
+        .login-container{
+            position:relative;
+            z-index:10;
+            width:100%;
+            max-width:500px;
+            background:rgba(10,20,10,0.9);
+            backdrop-filter:blur(12px);
+            border-radius:3rem;
+            border:2px solid rgba(0,255,100,0.6);
+            box-shadow:0 25px 45px rgba(0,0,0,0.5);
+            padding:2rem 1.8rem 2.2rem;
+        }
+
+        .simulasi-badge{
+            background:#00aa44;
+            color:white;
+            text-align:center;
+            padding:8px;
+            border-radius:30px;
+            font-weight:bold;
+            margin-bottom:20px;
+            font-size:14px;
+        }
+
+        .logo-area{
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            margin-bottom:1.4rem;
+        }
+
+        /* ==========================
+           LOGO PNG RESPONSIVE
+        ========================== */
+
+.logo-svg{
+    display:flex;
+    justify-content:center;
+    margin-bottom:10px;
+}
+
+.logo-img{
+    width:120px;
+}
+
+        .school-name{
+            font-size:1.45rem;
+            font-weight:700;
+            background:linear-gradient(135deg,#ccffcc,#00cc66);
+            -webkit-background-clip:text;
+            background-clip:text;
+            color:transparent;
+            text-align:center;
+        }
+
+        .exam-title{
+            font-size:1.1rem;
+            font-weight:600;
+            color:#88ff88;
+            text-align:center;
+            border-top:1px dashed rgba(0,255,100,0.4);
+            margin-top:10px;
+            padding-top:10px;
+        }
+
+        .year{
+            font-size:0.85rem;
+            color:#88ff88;
+            background:rgba(0,0,0,0.4);
+            display:inline-block;
+            padding:0.2rem 1rem;
+            border-radius:40px;
+            margin-top:6px;
+        }
+
+        .input-group{
+            margin-bottom:1.8rem;
+        }
+
+        label{
+            display:block;
+            color:#88ff88;
+            font-weight:500;
+            margin-bottom:8px;
+            font-size:0.9rem;
+        }
+
+        .input-field{
+            width:100%;
+            padding:14px 18px;
+            background:#1a2a1a;
+            border:1.5px solid #2c5a2c;
+            border-radius:2rem;
+            font-size:1rem;
+            color:#ffffff;
+            transition:all 0.2s;
+            outline:none;
+        }
+
+        .input-field:focus{
+            border-color:#00ff66;
+            box-shadow:0 0 0 3px rgba(0,255,100,0.3);
+            background:#0a2a0a;
+        }
+
+        .login-btn{
+            width:100%;
+            background:linear-gradient(95deg,#00cc66,#009944);
+            border:none;
+            padding:14px 18px;
+            border-radius:3rem;
+            font-weight:700;
+            font-size:1.1rem;
+            color:white;
+            cursor:pointer;
+            transition:all 0.25s;
+            box-shadow:0 5px 12px rgba(0,200,80,0.3);
+        }
+
+        .login-btn:hover{
+            transform:scale(1.01);
+            background:linear-gradient(95deg,#00dd77,#00aa55);
+        }
+
+        .info-stat{
+            display:flex;
+            justify-content:space-between;
+            margin-top:1.5rem;
+            background:rgba(0,0,0,0.6);
+            padding:0.8rem 1rem;
+            border-radius:2rem;
+            font-size:0.8rem;
+            color:#88ff88;
+            border:1px solid rgba(0,255,100,0.3);
+        }
+
+        .info-stat span{
+            color:#00ff88;
+            font-weight:700;
+        }
+
+        .error-message{
+            background:rgba(230,70,60,0.2);
+            border-left:4px solid #FF6A5C;
+            padding:12px 16px;
+            border-radius:1.5rem;
+            font-size:0.85rem;
+            color:#FFB3A8;
+            margin-bottom:1.5rem;
+            display:none;
+        }
+
+        .error-message.show{
+            display:block;
+        }
+
+        .footer-note{
+            text-align:center;
+            margin-top:1.6rem;
+            color:#7f7f7f;
+            font-size:0.7rem;
+        }
+
+        .simulasi-note{
+            text-align:center;
+            margin-top:1rem;
+            color:#ffaa44;
+            font-size:0.7rem;
+            background:rgba(255,170,0,0.1);
+            padding:6px;
+            border-radius:20px;
+        }
+
+        @media (max-width:500px){
+
+            .login-container{
+                padding:1.5rem;
+            }
+
+            .logo-img{
+    width:75px;
+}
+
+            .school-name{
+                font-size:1.2rem;
+            }
+
+            .info-stat{
+                flex-direction:column;
+                gap:8px;
+                text-align:center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <div class="simulasi-badge">
+        🔬 SIMULASI ASAT 🔬
+    </div>
+
+    <div class="logo-area">
+
+        <!-- LOGO PNG -->
+        <div class="logo-svg">
+            <img src="logo.png" alt="Logo YPLP PGRI" class="logo-img">
+        </div>
+
+        <div class="school-name">
+            SMP PGRI 1 CIBINONG
+        </div>
+
+        <div class="exam-title">
+            SIMULASI ASESMEN SUMATIF AKHIR TAHUN
+        </div>
+
+        <div class="year">
+            TAHUN AJARAN 2025/2026
+        </div>
+
+    </div>
+
+    <div id="errorBox" class="error-message">
+        ⚠️ <span id="errorText">ID Peserta atau Password salah.</span>
+    </div>
+
+    <form id="loginForm" autocomplete="off">
+
+        <div class="input-group">
+            <label>🆔 ID Peserta</label>
+
+            <input
+                type="text"
+                id="username"
+                class="input-field"
+                placeholder="Contoh: P001, P430, P844"
+                autocomplete="off"
+                required>
+        </div>
+
+        <div class="input-group">
+            <label>🔐 Password Simulasi</label>
+
+            <input
+                type="password"
+                id="password"
+                class="input-field"
+                placeholder="Masukkan password simulasi"
+                autocomplete="off"
+                required>
+        </div>
+
+        <button type="submit" id="submitBtn" class="login-btn">
+            🔬 MASUK SIMULASI
+        </button>
+
+    </form>
+
+    <div class="info-stat">
+        <div>📘 Kelas 7 <span>430 siswa</span></div>
+        <div>📙 Kelas 8 <span>414 siswa</span></div>
+        <div>📋 Total <span>844 akun</span></div>
+    </div>
+
+    <div class="footer-note">
+        * KHUSUS SIMULASI - Gunakan password yang dibagikan panitia
+    </div>
+
+    <div class="simulasi-note">
+        ⚡ Mode SIMULASI - Bukan ujian sebenarnya ⚡
+    </div>
+
+</div>
+
+<script>
+
+    // ============================================================
+    // KONFIGURASI SIMULASI
+    // ============================================================
+
+    const API_URL =
+    'https://login-simulasi-asat.vercel.app/api/validate-simulasi';
+
+    const REDIRECT_URL =
+    'https://sites.google.com/view/smppgri1cibinong/home-ios';
+
+    const form = document.getElementById('loginForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const errorBox = document.getElementById('errorBox');
+    const errorTextSpan = document.getElementById('errorText');
+
+    let isProcessing = false;
+
+    window.addEventListener('load', function(){
+        sessionStorage.clear();
+    });
+
+    form.addEventListener('submit', async (e) => {
+
+        e.preventDefault();
+
+        if(isProcessing) return;
+
+        errorBox.classList.remove('show');
+
+        const usernameInput =
+        document.getElementById('username');
+
+        const passwordInput =
+        document.getElementById('password');
+
+        const id_peserta =
+        usernameInput.value.trim().toUpperCase();
+
+        const password =
+        passwordInput.value;
+
+        if(!id_peserta || !password){
+
+            errorTextSpan.innerText =
+            'ID Peserta dan Password wajib diisi.';
+
+            errorBox.classList.add('show');
+            return;
+        }
+
+        const idRegex = /^P(\d{3,4})$/;
+        const match = id_peserta.match(idRegex);
+
+        if(!match){
+
+            errorTextSpan.innerText =
+            'Format ID Peserta salah. Gunakan format P001 hingga P844.';
+
+            errorBox.classList.add('show');
+            return;
+        }
+
+        const idNumber = parseInt(match[1], 10);
+
+        if(idNumber < 1 || idNumber > 844){
+
+            errorTextSpan.innerText =
+            'ID Peserta tidak valid (hanya P001 - P844).';
+
+            errorBox.classList.add('show');
+            return;
+        }
+
+        isProcessing = true;
+
+        submitBtn.innerHTML = '⏳ Memverifikasi...';
+        submitBtn.disabled = true;
+
+        try {
+
+    await new Promise(r =>
+        setTimeout(r, Math.random() * 1500)
+    );
+
+    const response = await fetch(API_URL, {
+
+                method:'POST',
+
+                headers:{
+                    'Content-Type':'application/json'
+                },
+
+                body:JSON.stringify({
+                    id_peserta,
+                    password
+                })
+            });
+
+            const result = await response.json();
+
+            if(result.success){
+
+                sessionStorage.clear();
+
+                sessionStorage.setItem(
+                    'logged_in_as',
+                    id_peserta
+                );
+
+                sessionStorage.setItem(
+                    'kelas',
+                    result.data.kelas
+                );
+
+                window.location.href =
+                REDIRECT_URL
+                + '?id='
+                + encodeURIComponent(id_peserta)
+                + '&mode=simulasi';
+
+            }else{
+
+                sessionStorage.clear();
+
+                errorTextSpan.innerText =
+                result.message
+                || 'ID Peserta atau Password simulasi salah.';
+
+                errorBox.classList.add('show');
+
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+
+        }catch(error){
+
+            console.error('Error:', error);
+
+            errorTextSpan.innerText =
+            'Gagal terhubung ke server simulasi. Periksa koneksi Anda.';
+
+            errorBox.classList.add('show');
+
+            sessionStorage.clear();
+
+        }finally{
+
+            isProcessing = false;
+
+            submitBtn.innerHTML =
+            '🔬 MASUK SIMULASI';
+
+            submitBtn.disabled = false;
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
