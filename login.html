@@ -328,7 +328,7 @@
                 // Hapus session lama sebelum menyimpan yang baru
                 sessionStorage.clear();
                 sessionStorage.setItem('logged_in_as', id_peserta);
-                sessionStorage.setItem('kelas', result.data.kelas);
+                sessionStorage.setItem('kelas', result.data?.kelas || '');
                 
                 // Redirect ke halaman ujian
                 window.location.href = REDIRECT_URL + '?id=' + encodeURIComponent(id_peserta);
