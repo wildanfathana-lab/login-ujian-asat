@@ -74,122 +74,41 @@
 }
 
         .school-name {
-            font-size: 1.45rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #FFF8E7, #FFD966);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-align: center;
-        }
+    font-size: clamp(18px, 5vw, 34px);
+    font-weight: 700;
+    background: linear-gradient(135deg, #FFF8E7, #FFD966);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-align: center;
+    white-space: nowrap;
+}
 
-        .exam-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #FFE3A4;
-            text-align: center;
-            border-top: 1px dashed rgba(255, 200, 100, 0.4);
-            margin-top: 10px;
-            padding-top: 10px;
-        }
+.exam-title {
+    font-size: clamp(14px, 4vw, 24px);
+    font-weight: 600;
+    color: #FFE3A4;
+    text-align: center;
+    border-top: 1px dashed rgba(255, 200, 100, 0.4);
+    margin-top: 10px;
+    padding-top: 10px;
 
-        .year {
-            font-size: 0.85rem;
-            color: #FFD966;
-            background: rgba(0,0,0,0.4);
-            display: inline-block;
-            padding: 0.2rem 1rem;
-            border-radius: 40px;
-            margin-top: 6px;
-        }
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
 
-        .input-group {
-            margin-bottom: 1.8rem;
-        }
-
-        label {
-            display: block;
-            color: #FFE3A4;
-            font-weight: 500;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
-        }
-
-        .input-field {
-            width: 100%;
-            padding: 14px 18px;
-            background: #121212;
-            border: 1.5px solid #2c2c2c;
-            border-radius: 2rem;
-            font-size: 1rem;
-            color: #f0f0f0;
-            transition: all 0.2s;
-            outline: none;
-        }
-
-        .input-field:focus {
-            border-color: #FFC857;
-            box-shadow: 0 0 0 3px rgba(255, 200, 80, 0.3);
-            background: #1a1a1a;
-        }
-
-        .login-btn {
-            width: 100%;
-            background: linear-gradient(95deg, #FFC857, #FFA41E);
-            border: none;
-            padding: 14px 18px;
-            border-radius: 3rem;
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: #0a0a0a;
-            cursor: pointer;
-            transition: all 0.25s;
-            box-shadow: 0 5px 12px rgba(255, 180, 50, 0.3);
-        }
-
-        .login-btn:hover {
-            transform: scale(1.01);
-            background: linear-gradient(95deg, #FFD46E, #FFB42E);
-        }
-
-        .info-stat {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 1.5rem;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 0.8rem 1rem;
-            border-radius: 2rem;
-            font-size: 0.8rem;
-            color: #CBCBCB;
-            border: 1px solid rgba(255,200,100,0.3);
-        }
-
-        .info-stat span {
-            color: #FFD966;
-            font-weight: 700;
-        }
-
-        .error-message {
-            background: rgba(230, 70, 60, 0.2);
-            border-left: 4px solid #FF6A5C;
-            padding: 12px 16px;
-            border-radius: 1.5rem;
-            font-size: 0.85rem;
-            color: #FFB3A8;
-            margin-bottom: 1.5rem;
-            display: none;
-        }
-
-        .error-message.show {
-            display: block;
-        }
-
-        .footer-note {
-            text-align: center;
-            font-size: 0.7rem;
-            margin-top: 1.6rem;
-            color: #7f7f7f;
-        }
+.year {
+    font-size: clamp(11px, 3vw, 16px);
+    color: #FFD966;
+    background: rgba(0,0,0,0.4);
+    display: inline-block;
+    padding: 0.2rem 1rem;
+    border-radius: 40px;
+    margin-top: 6px;
+    white-space: nowrap;
+}
 
         @media (max-width: 500px) {
     .login-container { padding: 1.5rem; }
