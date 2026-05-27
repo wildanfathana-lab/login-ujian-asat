@@ -316,8 +316,10 @@
             const response = await fetch(API_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ id_peserta, password })
-            });
+                body: JSON.stringify({
+    id: id_peserta,
+    password: password
+})});
             
             const result = await response.json();
             
